@@ -1,0 +1,81 @@
+TESTES:
+
+[a única rota que não precisa de autenticação:]
+
+curl -X GET http://localhost:3000/api/product
+
+
+
+
+
+[uai, mas essas aqui debaixo também não precisam (???): [como resolvo isso? porque ao mesmo tempo que preciso de autenticação para criar um usuário, preciso de um usuário para autenticar: eu primeiro crio o primeiro usuário e depois restrinjo o acesso a quem tem autenticação (e uso esse primeiro usuário para criar os outros?)? (???)]]
+
+curl -i -X POST -H "Content-Type: application/json" -d '{"username": "admin", "name": "System Admin", "password": "admin123", "userType": "admin"}' http://localhost:3000/api/user
+
+[user: rafa]
+curl -i -X POST -H "Content-Type: application/json" -d '{"username": "rafa", "name": "Rafael Avelar", "password": "frank123", "userType": "user"}' http://localhost:3000/api/user
+
+curl -X GET http://localhost:3000/api/user
+
+curl -i -X GET http://localhost:3000/api/user/admin
+
+[user: rafa]
+curl -i -X GET http://localhost:3000/api/user/rafa
+
+curl -i -X PUT -H "Content-Type: application/json" -d '{"username": "admin", "name": "System Admin", "password": "admin456", "userType": "admin"}' http://localhost:3000/api/user/admin
+
+curl -i -X DELETE http://localhost:3000/api/user/admin
+
+
+
+
+
+curl -i -X POST -H "Content-Type: application/json" -d '{"username":"admin", "password":"admin456"}' http://localhost:3000/api/login
+
+[user: rafa]
+curl -i -X POST -H "Content-Type: application/json" -d '{"username":"rafa", "password":"frank123"}' http://localhost:3000/api/login
+
+
+
+
+
+[a partir daqui, todas precisam de uma autenticação - e umas tem restrição de acesso:]
+
+[o cookie de sessão gerado: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8]
+
+curl -X GET -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/login
+
+[user: rafa]
+curl -X GET -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZmEiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE3MTA3ODIwMDEsImV4cCI6MTcxMDc4NTYwMX0.cRjf0KxLb7f_AJ6wv1Ue4cKCMP9-T43xu_iknK0sHYw" http://localhost:3000/api/login
+
+
+
+curl -X POST -H "Content-Type: application/json" -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" -d '{"name": "Tim Maia - Tim Maia", "value": 115, "imgUrl": "/img/tim-maia-tim-maia.webp"}' http://localhost:3000/api/product
+
+[user: rafa]
+curl -X POST -H "Content-Type: application/json" -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJhZmEiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE3MTA3ODIwMDEsImV4cCI6MTcxMDc4NTYwMX0.cRjf0KxLb7f_AJ6wv1Ue4cKCMP9-T43xu_iknK0sHYw" -d '{"name": "Índia - Gal Costa", "value": 250, "imgUrl": "/img/india-gal-costa.webp"}' http://localhost:3000/api/product
+
+OBSERVAÇÃO IMPORTANTE: o caminho até as imagens, a partir do script.js, deve ser relativo à localização do arquivo HTML (no caso, index.html) que o navegador está carregando. Isso porque os caminhos dos recursos (como imagens, CSS, JavaScript) em documentos HTML são resolvidos com base na localização do documento HTML, não na localização do script JavaScript ou folhas de estilo CSS.
+
+curl -X GET -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/product/1710771428313
+
+curl -X PUT -H "Content-Type: application/json" -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" -d '{"name": "Afrociberdelia - Nação Zumbi", "value": 175, "imgUrl": "/img/afrociberdelia-nacao-zumbi.webp"}' http://localhost:3000/api/product/1710771291112
+
+curl -X DELETE -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/product/1710768704273
+
+curl -X POST -H "Content-Type: application/json" -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" -d '{"items": [{"productId": 1710715687499, "name": "Fa-Tal - Gal a Todo Vapor", "quantity": 10}]}' http://localhost:3000/api/order
+
+curl -X GET -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/order 
+
+curl -X GET -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/order/1710719379894
+
+curl -X PUT -H "Content-Type: application/json" -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" -d '{"items": [{"productId": 1710715687499, "name": "Fa-Tal - Gal a Todo Vapor", "quantity": 1}]}' http://localhost:3000/api/order/1710719379894
+
+curl -X DELETE -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/order/1710719379894
+
+
+
+
+
+- FALTA FAZER TODO O FRONT
+- FALTA IMPLEMENTAR TRATAMENTOS DE ERRO E VALIDAÇÕES (AULA 4?) NO BACK

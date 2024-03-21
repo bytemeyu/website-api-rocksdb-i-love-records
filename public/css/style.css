@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffff00;
+}
+
+header {
+    background-color: #ffff00;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+h1 > img {
+    width: 70%;
+}
+
+main {
+    padding: 20px;
+}
+
+#produtos {
+    background-color: #ffffab;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+#lista-produtos {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center; /*para centralizar os produtos*/
+}
+
+.produto {
+    border: 1px solid #ddd;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 0px 30px 20px 30px;
+}
+
+#coverImg {
+    width: 300px;
+}
+
+footer {
+    text-align: center;
+    padding: 50px;
+}
+
+footer > img {
+    width: 55%;
+}
