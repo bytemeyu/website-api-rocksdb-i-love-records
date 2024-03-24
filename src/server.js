@@ -1,21 +1,20 @@
 import dotenv from 'dotenv';
-//para importar o dotenv
-//para usar o config do dotenv, é necessário chamar o método config() do objeto dotenv. o método config() carrega as variáveis de ambiente do arquivo .env para o process.env.
+//to import the dotenv. to use the dotenv config method, you need to call the config() method of the dotenv object. the config() method loads the environment variables from the .env file into the process.env.
 
 dotenv.config();
-//chamando o método config() do objeto dotenv, ou seja, carregando as variáveis de ambiente do arquivo .env para o process.env.
+//calling the config() method of the dotenv object, that is, loading the environment variables from the .env file into the process.env.
 
-//para garantir que as variáveis de ambiente estejam disponíveis para todo o meu aplicativo desde o início, é necessário importar o dotenv e chamar o método config() no início do arquivo server.js (antes de importar quaisquer outros módulos).
-
-//console.log(process.env.JWT_SECRET); //só para testar se o dotenv está funcionando
+//to ensure that the environment variables are available to the entire application from the beginning, it is necessary to import dotenv and call the config() method at the beginning of the server.js file (before importing any other modules).
 
 import app from './app.js';
-//importando o objeto app do módulo app.js. o objeto app é o servidor HTTP.
+//importing the app object from the app.js module. the app object is the HTTP server.
 
 const port = process.env.PORT || 3000;
-//declarando a constante que vai definir a porta que o servidor irá escutar. neste caso, ao invés de só 3000, colocamos o 'process.env.PORT'. isso tudo significa "Defina port como o valor da variável de ambiente PORT se ela estiver definida e tiver um valor verdadeiro; caso contrário, use 3000 como o valor padrão.". o uso de process.env.PORT permite que o número da porta seja configurado externamente, o que é uma prática comum em ambientes de hospedagem ou deploy, como AWS ou outros.
+//declaring the constant that will define the port that the server will listen to. in this case, instead of just 3000, we put 'process.env.PORT'. all this means "Set port as the value of the PORT environment variable if it is defined (in the .env file) and has a truthy value; otherwise, use 3000 as the default value.". the use of process.env.PORT allows the port number to be configured externally, which is a common practice in hosting or deployment environments, such as AWS or others.
 
 app.listen(port, () => {
-    console.log(`servidor rodando na porta ${port} AAAAA`);
+    console.log(`server running on port ${port}`);
 });
-//o código acima inicia o servidor HTTP. o método 'app.listen()' vincula e escuta conexões na porta definida. a função de callback é executada assim que o servidor começa a escutar, imprimindo uma mensagem no console informando que o servidor está em execução e a porta na qual está escutando.
+//the code above starts the HTTP server. the 'app.listen()' method binds and listens for connections on the defined port. the callback function is executed as soon as the server starts listening, printing a message in the console informing that the server is running and the port it is listening to.
+
+//FALTA: implementar HTTPS (Let's Encrypt?);

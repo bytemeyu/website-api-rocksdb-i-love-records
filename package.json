@@ -1,5 +1,5 @@
 {
-  "name": "myapi",
+  "name": "iloverecords",
   "version": "1.0.0",
   "type": "module",
   "description": "",
@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./src/server.js"
   },
-  "author": "Anita",
+  "author": "bytemeyu",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
