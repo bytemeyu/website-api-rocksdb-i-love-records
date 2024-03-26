@@ -48,8 +48,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 //configuring the server to use the express.static module. this allows the server to serve static files (such as images, css, js, etc) from a specific directory. path.join(__dirname, '..', 'public') returns the absolute path to the public directory. path.join() concatenates path segments. __dirname is where we are, '..' is to up one level, and 'public' is the folder we want to serve. when we concatenate these three segments, we get the absolute path to the public directory.
-//I've had to do all this because I'm using ES Modules. I chose to use ESM throughout the project because it's more modern and easier to use.
-//this means that, if you have a file called index.html inside /public, it can be accessed directly through the root of your domain (in this case, http://localhost:8080/ or localhost:3000/).
+//i've had to do all this because i'm using ES Modules. i chose to use ESM throughout the project because it's more modern and easier to use.
+//this means that, if you have a file called index.html inside /public, it can be accessed directly through the root of your domain (in this case, http://localhost:3000/).
 
 app.use(cookieParser());
 //configuring the server to use the cookie-parser module. this allows the server to understand and manipulate cookies.

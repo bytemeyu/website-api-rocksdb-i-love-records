@@ -72,10 +72,3 @@ curl -X GET -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vy
 curl -X PUT -H "Content-Type: application/json" -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" -d '{"items": [{"productId": 1710715687499, "name": "Fa-Tal - Gal a Todo Vapor", "quantity": 1}]}' http://localhost:3000/api/order/1710719379894
 
 curl -X DELETE -H "Cookie: session_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4NDMzNSwiZXhwIjoxNzEwOTg3OTM1fQ.FyJfC6IBGxqUrzjqYuzz39iFYverCotGHN1m5X7n0e8" http://localhost:3000/api/order/1710719379894
-
-
-
-
-
-- FALTA FAZER TODO O FRONT
-- FALTA IMPLEMENTAR TRATAMENTOS DE ERRO E VALIDAÇÕES (AULA 4?) NO BACK

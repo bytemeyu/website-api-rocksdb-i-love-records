@@ -1,25 +1,30 @@
 import express from 'express';
-//importando o express, que é um módulo que facilita a criação de servidores HTTP.
+//express also allows us to create routes. we are importing the express module to create the routes related to users.
+
 import { createUser, getUsers, getUserByUsername, updateUser, deleteUser } from '../controllers/userController.js';
-//importando as funções que lidam com a lógica das rotas relacionadas aos usuários.
+//importing the functions that deal with the logic of the routes related to users.
+
+
 
 const router = express.Router();
-//criando um objeto do tipo Router, que é um módulo do express que facilita a criação de rotas.
+//creating an object of type Router, which is a module of express that makes it easier to create routes.
 
 router.post('/user', createUser);
-//rota para criar um usuário. é um post, afinal, estamos enviando dados (username, name, password e userType).
+//route to create a user. it is a post, after all, we are creating data.
 
 router.get('/user', getUsers);
-//rota para listar todos os usuários. é um get, afinal, estamos lendo dados.
+//route to list all users. it is a get, after all, we are reading data.
 
 router.get('/user/:username', getUserByUsername);
-//rota para ler um usuário específico. é um get, afinal, estamos lendo dados. o username do usuário que queremos ler é passado como parâmetro na URL.
+//route to read a specific user. it is a get, after all, we are reading data. the username of the user we want to read is passed as a parameter in the URL.
 
 router.put('/user/:username', updateUser);
-//rota para atualizar um usuário. é um put, afinal, estamos atualizando dados. o username do usuário que queremos atualizar é passado como parâmetro na URL.
+//route to update a user. it is a put, after all, we are updating data. the username of the user we want to update is passed as a parameter in the URL.
 
 router.delete('/user/:username', deleteUser);
-//rota para deletar um usuário. é um delete, afinal, estamos deletando dados. o username do usuário que queremos deletar é passado como parâmetro na URL.
+//route to delete a user. it is a delete, after all, we are deleting data. the username of the user we want to delete is passed as a parameter in the URL.
+
+
 
 export default router;
-//exportando o objeto router. isso permite que outros módulos importem e usem o objeto router. no caso, estamos exportando o objeto router para que o módulo app.js possa usar as rotas definidas neste módulo.
+//exporting the router object. this allows other modules to import and use the router object. in this case, we are exporting the router object so that the app.js module can use the routes defined in this module.
